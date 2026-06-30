@@ -467,3 +467,77 @@ main {
     transform: translateY(0);
   }
 }
+
+@media (max-width: 768px) {
+  body {
+    overflow-y: auto; 
+  }
+
+  .container {
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+  }
+
+  aside {
+    width: 100%;
+    min-width: unset;
+    padding: 20px;
+    height: auto;
+  }
+
+  .name {
+    margin-bottom: 20px;
+  }
+
+  .contact {
+    margin-top: 20px;
+  }
+
+  main {
+    padding: 20px;
+    height: auto;
+    overflow: visible;
+  }
+
+  .intro {
+    flex-direction: column; 
+    gap: 30px;
+  }
+
+  .image {
+    flex: 0 0 100%;
+    max-width: 200px;
+  }
+
+  .photography-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
+    gap: 12px;
+    max-height: none;
+    overflow-y: visible;
+  }
+  
+  .photography-grid img {
+    height: 150px;
+  }
+
+  .contact-container {
+    flex-direction: column;
+    gap: 30px;
+    min-width: 100%;
+    padding: 20px;
+  }
+
+  .lightbox {
+    padding: 0 10px;
+  }
+
+  .lightbox-content {
+    max-width: 90%;
+  }
+
+  .lightbox-arrow {
+    font-size: 24pt;
+    padding: 10px;
+  }
+}
