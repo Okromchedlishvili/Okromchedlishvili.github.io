@@ -2,7 +2,8 @@
 
 <html>
 <head>
-    <Title>Home</Title>
+    <Title>Portfolio</Title>
+    <link rel="icon" type="image/png" href="Images/Bio/icon.png">
     <link rel="stylesheet" href="style.css">    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -90,7 +91,8 @@
                 <div class="contact-container">
                     <div class="contact-form-box">
                         <h2>Reach Out</h2>
-                        <form id="contact-form">
+                        <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                            <input type="hidden" name="acces-key" value="575cd916-a3a8-4634-8919-b29d7abebf51">
                             <input type="text" placeholder="Your Name" required>
                             <input type="email" placeholder="Your Email" required>
                             <textarea placeholder="Your Message" rows="6" required></textarea>
