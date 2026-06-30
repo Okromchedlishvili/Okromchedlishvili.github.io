@@ -291,10 +291,26 @@ const submitSuccess = document.getElementById('submit-success');
 if (contactForm) {
     contactForm.addEventListener('submit', (event) => {
         event.preventDefault();
-        submitSuccess.classList.remove('hide');
-        submitSuccess.style.animation = 'none';
-        submitSuccess.offsetHeight; 
-        submitSuccess.style.animation = '';
-        contactForm.reset();
+        const formData = new FormData(contactForm);
+        fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                submitSuccess.classList.remove('hide');
+                submitSuccess.style.animation = 'none';
+                submitSuccess.offsetHeight; 
+                submitSuccess.style.animation = '';
+                contactForm.reset();
+            } else {
+                alert("Something went wrong. Please try again!");
+            }
+        })
+    .catch(error => {
+            console.error("Submission error:", error);
+            alert("Network error. Please check your connection.");
+        });
     });
 }
