@@ -487,11 +487,11 @@ main {
   }
 
   .name {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
   }
 
   .contact {
-    margin-top: 20px;
+    margin-top: 60px;
   }
 
   main {
@@ -502,7 +502,7 @@ main {
 
   .intro {
     flex-direction: column; 
-    gap: 30px;
+    gap: 0px;
   }
 
   .image {
@@ -525,7 +525,7 @@ main {
     flex-direction: column;
     gap: 30px;
     min-width: 100%;
-    padding: 20px;
+    padding: 60px;
   }
 
   .lightbox {
@@ -539,5 +539,54 @@ main {
   .lightbox-arrow {
     font-size: 24pt;
     padding: 10px;
+  }
+}
+
+@media (max-width: 900px) and (orientation: landscape) {
+  body {
+    overflow: hidden;
+  }
+  
+.container {
+    flex-direction: row;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .contact {
+    margin-top:45px;
+  }
+
+  aside {
+    height: 100vh; 
+    max-height: none; 
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+
+  }
+
+  main {
+    height: 100vh;
+    padding: 20px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .intro {
+    flex-direction: row; 
+    gap: 30px;
+  }
+
+  .photography-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    max-height: 100%;
+    overflow-y: visible;
+  }
+
+  .photography-grid img {
+    height: 180px;
   }
 }
