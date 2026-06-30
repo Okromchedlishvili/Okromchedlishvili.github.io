@@ -304,13 +304,7 @@ if (contactForm) {
                 submitSuccess.offsetHeight; 
                 submitSuccess.style.animation = '';
                 contactForm.reset();
-            } else {
-                alert("Something went wrong. Please try again!");
             }
         })
-    .catch(error => {
-            console.error("Submission error:", error);
-            alert("Network error. Please check your connection.");
-        });
     });
 }
