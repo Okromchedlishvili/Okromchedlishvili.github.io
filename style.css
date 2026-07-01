@@ -487,6 +487,7 @@ main {
   }
 
   .name {
+    margin-top: 20px;
     margin-bottom: 40px;
   }
 
@@ -562,7 +563,7 @@ main {
     max-height: none; 
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-
+    padding: 20px 15px 60px 15px;
   }
 
   main {
