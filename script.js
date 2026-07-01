@@ -314,6 +314,21 @@ function loadMagazineGallery() {
                         sheet.classList.remove('flipped');
                         sheet.style.zIndex = spawnedSheets.length - idx;
                     }
+                    const flippedCount = magazineGrid.querySelectorAll('.book-page.flipped').length;
+                    if (flippedCount > 0) {
+                        magazineGrid.classList.add('is-open');
+                    } else {
+                        magazineGrid.classList.remove('is-open');
+                    }
+                    if (window.innerWidth <= 768) {
+                        const flippedCount = magazineGrid.querySelectorAll('.book-page.flipped').length;
+
+                        if (flippedCount > 0) {
+                            magazineGrid.style.transform = "translateX(80%) scale(1)";
+                        } else {
+                            magazineGrid.style.transform = "translateX(0%) scale(1)";
+                        }
+                    }
                 });
             });
 
@@ -321,8 +336,6 @@ function loadMagazineGallery() {
         })
         .catch(error => console.error("Oei Magazine JSON Error:", error));
 }
-
-
 
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
