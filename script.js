@@ -32,6 +32,12 @@ const magazineView = document.getElementById('magazine-view');
 const contactView = document.getElementById('contact-view');
 
 function hideAllViews() {
+    document.querySelectorAll('.photography-grid').forEach(grid => {
+        grid.scrollTop = 0;
+    });
+    document.querySelectorAll('.design-grid').forEach(grid => {
+        grid.scrollTop = 0;
+    });
     homeView.classList.add('hide')
     astroView.classList.add('hide')
     buildingView.classList.add('hide')
@@ -42,9 +48,16 @@ function hideAllViews() {
     movieView.classList.add('hide');
     magazineView.classList.add('hide');
     contactView.classList.add('hide');
-    document.querySelectorAll('.photography-grid').forEach(grid => {
-    grid.scrollTop = 0;
+    const flippedPages = document.querySelectorAll('.book-page.flipped');
+    flippedPages.forEach(sheet => {
+        sheet.classList.remove('flipped');
+        const idx = parseInt(sheet.getAttribute('data-sheet'), 10);
+        const totalSheets = document.querySelectorAll('.book-page').length;
+        sheet.style.zIndex = totalSheets - idx;
     });
+    if (contactForm) {
+        contactForm.reset();
+    }
     submitSuccess.classList.add('hide');
 }
 
@@ -255,20 +268,61 @@ function loadMovieGallery() {
 
 function loadMagazineGallery() {
     if (loadedGalleries.magazine) return;
-    const magazineGrid = document.getElementById('magazine-grid');
+    const magazineGrid = document.getElementById('magazine-book-container');
 
     fetch('Json/magazine.json')
         .then(response => response.json())
         .then(photoList => {
-            let gridHTML = "";
-            photoList.forEach(photo => {
-                gridHTML += `<img src="Projects/Band Magazine/${photo.Name}" alt="Band Magazine" loading="lazy">`;
+            magazineGrid.innerHTML = ""; 
+            let sheetIndex = 0;
+            const totalPhotos = photoList.length;
+
+            for (let i = 0; i < totalPhotos; i += 2) {
+                const sheet = document.createElement('div');
+                sheet.className = 'book-page';
+                sheet.setAttribute('data-sheet', sheetIndex);
+                let sidesHTML = `
+                    <div class="page-side front">
+                        <img src="Projects/Band Magazine/${photoList[i].Name}" alt="Page ${i + 1}" loading="lazy">
+                    </div>
+                `;
+
+                if (i + 1 < totalPhotos) {
+                    sidesHTML += `
+                        <div class="page-side back">
+                            <img src="Projects/Band Magazine/${photoList[i + 1].Name}" alt="Page ${i + 2}" loading="lazy">
+                        </div>
+                    `;
+                } else {
+                    sidesHTML += `<div class="page-side back"></div>`;
+                }
+                sheet.innerHTML = sidesHTML;
+                magazineGrid.appendChild(sheet);
+                sheetIndex++;
+            }
+
+            const spawnedSheets = magazineGrid.querySelectorAll('.book-page');
+            spawnedSheets.forEach((sheet, idx) => {
+                sheet.style.zIndex = spawnedSheets.length - idx;
+                sheet.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    
+                    if (!sheet.classList.contains('flipped')) {
+                        sheet.classList.add('flipped');
+                        sheet.style.zIndex = idx + 1; 
+                    } else {
+                        sheet.classList.remove('flipped');
+                        sheet.style.zIndex = spawnedSheets.length - idx;
+                    }
+                });
             });
-            magazineGrid.innerHTML = gridHTML;
+
             loadedGalleries.magazine = true;
         })
-        .catch(error => console.error("Oei Magazine", error));
+        .catch(error => console.error("Oei Magazine JSON Error:", error));
 }
+
+
 
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');

@@ -480,6 +480,90 @@ main {
   cursor: pointer;
 }
 
+.design-grid#magazine-grid {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  scrollbar-width: none;
+  gap: 40px;
+  padding: 10px 20px;
+}
+
+.book-viewport {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 60vh;
+  margin-top: 20px;
+  perspective: 1500px;
+}
+
+.magazine-book {
+  position: relative;
+  width: 320px;
+  height: 450px;
+  transform-style: preserve-3d;
+  transform: translateX(50%); 
+  transition: transform 0.5s ease;
+}
+
+.book-page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.page-side {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.page-side.front {
+  z-index: 2;
+}
+
+.page-side.back {
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
+.book-page img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.page-side.front img {
+  border-radius: 0 4px 4px 0;
+  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.page-side.back img {
+  border-radius: 4px 0 0 4px;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.book-page.flipped {
+  transform: rotateY(-180deg);
+}
+
 .lightbox {
   position: fixed;
   top: 0;
