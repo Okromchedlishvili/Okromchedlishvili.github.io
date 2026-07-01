@@ -16,6 +16,8 @@ const linkStreet = document.getElementById('link-street');
 const linkLandscape = document.getElementById('link-landscape');
 const linkPanorama = document.getElementById('link-panorama');
 const linkWildlife = document.getElementById('link-wildlife');
+const linkMovie = document.getElementById('link-movie');
+const linkMagazine = document.getElementById('link-magazine');
 const linkContact = document.getElementById('link-contact');
 
 const homeView = document.getElementById('home-view')
@@ -25,6 +27,8 @@ const streetView = document.getElementById('street-view');
 const landscapeView = document.getElementById('landscape-view');
 const panoramaView = document.getElementById('panorama-view');
 const wildlifeView = document.getElementById('wildlife-view');
+const movieView = document.getElementById('movie-view');
+const magazineView = document.getElementById('magazine-view');
 const contactView = document.getElementById('contact-view');
 
 function hideAllViews() {
@@ -35,6 +39,8 @@ function hideAllViews() {
     landscapeView.classList.add('hide');
     panoramaView.classList.add('hide')
     wildlifeView.classList.add('hide')
+    movieView.classList.add('hide');
+    magazineView.classList.add('hide');
     contactView.classList.add('hide');
     document.querySelectorAll('.photography-grid').forEach(grid => {
     grid.scrollTop = 0;
@@ -48,7 +54,9 @@ const loadedGalleries = {
     street: false,
     landscape: false,
     panorama: false,
-    wildlife: false
+    wildlife: false,
+    movie: false,
+    magazine: false,
 };
 
 linkHome.addEventListener('click', (event) => {
@@ -100,6 +108,20 @@ linkWildlife.addEventListener('click', (event) => {
     hideAllViews();
     wildlifeView.classList.remove('hide');
     loadWildlifeGallery();
+});
+
+linkMovie.addEventListener('click', (event) => {
+    event.preventDefault();
+    hideAllViews();
+    movieView.classList.remove('hide');
+    loadMovieGallery();
+});
+
+linkMagazine.addEventListener('click', (event) => {
+    event.preventDefault();
+    hideAllViews();
+    magazineView.classList.remove('hide');
+    loadMagazineGallery();
 });
 
 linkContact.addEventListener('click', (event) => {
@@ -214,6 +236,40 @@ function loadWildlifeGallery() {
         .catch(error => console.error("Oei Wildlife", error));
 }
 
+function loadMovieGallery() {
+    if (loadedGalleries.movie) return;
+    const movieGrid = document.getElementById('movie-grid');
+
+    fetch('Json/movie.json')
+        .then(response => response.json())
+        .then(photoList => {
+            let gridHTML = "";
+            photoList.forEach(photo => {
+                gridHTML += `<img src="Projects/Movie Poster/${photo.Name}" alt="Movie Poster" loading="lazy">`;
+            });
+            movieGrid.innerHTML = gridHTML;
+            loadedGalleries.movie = true;
+        })
+        .catch(error => console.error("Oei Movie", error));
+}
+
+function loadMagazineGallery() {
+    if (loadedGalleries.magazine) return;
+    const magazineGrid = document.getElementById('magazine-grid');
+
+    fetch('Json/magazine.json')
+        .then(response => response.json())
+        .then(photoList => {
+            let gridHTML = "";
+            photoList.forEach(photo => {
+                gridHTML += `<img src="Projects/Band Magazine/${photo.Name}" alt="Band Magazine" loading="lazy">`;
+            });
+            magazineGrid.innerHTML = gridHTML;
+            loadedGalleries.magazine = true;
+        })
+        .catch(error => console.error("Oei Magazine", error));
+}
+
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 const lightboxClose = document.getElementById('lightbox-close');
@@ -224,10 +280,10 @@ let currentImageIndex = 0;
 let activeImagesList = [];
 
 document.querySelector('.preview').addEventListener('click', (event) => {
-    if (event.target.tagName === 'IMG' && event.target.closest('.photography-grid')) {
+    if (event.target.tagName === 'IMG' && (event.target.closest('.photography-grid') || event.target.closest('.design-grid') || event.target.closest('.thumb-row'))) {
         const clickedImg = event.target;
-        const currentGrid = clickedImg.closest('.photography-grid');
-        
+        const currentGrid = clickedImg.closest('.photography-grid') || clickedImg.closest('.thumb-row') || clickedImg.closest('.showcase-bottom');
+
         activeImagesList = Array.from(currentGrid.querySelectorAll('img'));
         currentImageIndex = activeImagesList.indexOf(clickedImg);
         
