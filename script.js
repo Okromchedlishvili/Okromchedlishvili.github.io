@@ -324,7 +324,7 @@ function loadMagazineGallery() {
                         const flippedCount = magazineGrid.querySelectorAll('.book-page.flipped').length;
 
                         if (flippedCount > 0) {
-                            magazineGrid.style.transform = "translateX(80%) scale(1)";
+                            magazineGrid.style.transform = "translateX(90%) scale(1)";
                         } else {
                             magazineGrid.style.transform = "translateX(0%) scale(1)";
                         }
@@ -407,6 +407,33 @@ window.addEventListener('keydown', (e) => {
         lightbox.classList.add('hide');
     }
 });
+
+let touchStartX = 0;
+let touchEndX = 0;
+
+const minSwipeDistance = 50; 
+
+lightbox.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+
+lightbox.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipeGesture();
+}, { passive: true });
+
+function handleSwipeGesture() {
+    const swipeDistance = touchEndX - touchStartX;
+
+    if (swipeDistance < -minSwipeDistance && currentImageIndex < activeImagesList.length - 1) {
+        currentImageIndex++;
+        updateLightboxImage();
+    }
+    else if (swipeDistance > minSwipeDistance && currentImageIndex > 0) {
+        currentImageIndex--;
+        updateLightboxImage();
+    }
+}
 
 const contactForm = document.getElementById('contact-form');
 const submitSuccess = document.getElementById('submit-success');
