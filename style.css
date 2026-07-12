@@ -60,6 +60,7 @@ aside {
   font-size: 22pt;
   line-height: 22pt;
   margin-bottom: 60px;
+  cursor: pointer;
 }
 
 .name:hover {
@@ -79,6 +80,8 @@ nav {
   display: flex;
   align-items: center;
   gap: 4px;
+  width: fit-content;
+  cursor: pointer;
 }
 
 .dropdown-header:hover {
@@ -110,6 +113,8 @@ nav {
   font-size: 14pt;
   color: #ededed;
   text-decoration: none;
+  width: fit-content;
+  cursor: pointer;
 }
 
 .dropdown-content a:hover {
@@ -125,6 +130,8 @@ nav {
 .contact {
   font-size: 14pt;
   margin-top: auto;
+  width: fit-content;
+  cursor: pointer;
 }
 
 .contact:hover {
