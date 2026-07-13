@@ -18,6 +18,7 @@ const linkPanorama = document.getElementById('link-panorama');
 const linkWildlife = document.getElementById('link-wildlife');
 const linkMovie = document.getElementById('link-movie');
 const linkMagazine = document.getElementById('link-magazine');
+const linkWebsite = document.getElementById('link-website');
 const linkContact = document.getElementById('link-contact');
 
 const homeView = document.getElementById('home-view')
@@ -29,6 +30,7 @@ const panoramaView = document.getElementById('panorama-view');
 const wildlifeView = document.getElementById('wildlife-view');
 const movieView = document.getElementById('movie-view');
 const magazineView = document.getElementById('magazine-view');
+const websiteView = document.getElementById('website-view');
 const contactView = document.getElementById('contact-view');
 
 function hideAllViews() {
@@ -47,6 +49,7 @@ function hideAllViews() {
     wildlifeView.classList.add('hide')
     movieView.classList.add('hide');
     magazineView.classList.add('hide');
+    websiteView.classList.add('hide');
     contactView.classList.add('hide');
     const flippedPages = document.querySelectorAll('.book-page.flipped');
     flippedPages.forEach(sheet => {
@@ -135,6 +138,12 @@ linkMagazine.addEventListener('click', (event) => {
     hideAllViews();
     magazineView.classList.remove('hide');
     loadMagazineGallery();
+});
+
+linkWebsite.addEventListener('click', (event) => {
+    event.preventDefault();
+    hideAllViews();
+    websiteView.classList.remove('hide');
 });
 
 linkContact.addEventListener('click', (event) => {
@@ -319,15 +328,6 @@ function loadMagazineGallery() {
                         magazineGrid.classList.add('is-open');
                     } else {
                         magazineGrid.classList.remove('is-open');
-                    }
-                    if (window.innerWidth <= 768) {
-                        const flippedCount = magazineGrid.querySelectorAll('.book-page.flipped').length;
-
-                        if (flippedCount > 0) {
-                            magazineGrid.style.transform = "translateX(90%) scale(1)";
-                        } else {
-                            magazineGrid.style.transform = "translateX(0%) scale(1)";
-                        }
                     }
                 });
             });

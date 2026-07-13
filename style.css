@@ -43,6 +43,10 @@ body {
   height: 100vh;
 }
 
+/* ==========================================================================
+   # Sidebar
+   ========================================================================== */
+
 aside {
   width: 16vw;
   min-width: 300px;
@@ -126,6 +130,10 @@ nav {
   margin-top: 15px;
   opacity: 1;
 }
+
+/* ==========================================================================
+   # Contact
+   ========================================================================== */
 
 .contact {
   font-size: 14pt;
@@ -276,6 +284,10 @@ nav {
   transform: translateX(4px);
 }
 
+/* ==========================================================================
+   # Home
+   ========================================================================== */
+
 main {
   display: flex;
   flex: 1;
@@ -332,6 +344,10 @@ main {
 .hide {
   display: none !important;
 }
+
+/* ==========================================================================
+   # Photographs
+   ========================================================================== */
 
 #astro-view {
   width: 100%;
@@ -398,7 +414,7 @@ main {
   width: 100%;
   height: 250px;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: 4px;
   box-shadow: 0 4px 12px rgba(35, 35, 35, 0.3);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
@@ -422,6 +438,15 @@ main {
   cursor: pointer;
 }
 
+/* ==========================================================================
+   # Design Projects
+   ========================================================================== */
+
+#movie-view, #magazine-view, #website-view {
+  width: 100%;
+  height: 100%;
+}
+
 .design-grid {
   display: flex;
   flex-direction: column;
@@ -435,7 +460,7 @@ main {
 
 .project-header {
   align-self: flex-start;
-  max-width: 800px;
+  max-width: 900px;
 }
 
 .project-title {
@@ -452,6 +477,10 @@ main {
   color: #adadad;
   margin: 0;
 }
+
+/* ==========================================================================
+   # Movie Poster
+   ========================================================================== */
 
 .section-label, .showcase-item .label {
   font-size: 10pt;
@@ -497,7 +526,7 @@ main {
   height: auto;
   max-height: auto;
   object-fit: contain;
-  border-radius: 6px;
+  border-radius: 4px;
   box-shadow: 0 4px 12px rgba(35, 35, 35, 0.3);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
@@ -507,6 +536,10 @@ main {
   transform: scale(1.03);
   cursor: pointer;
 }
+
+/* ==========================================================================
+   # Band Magazine
+   ========================================================================== */
 
 .design-grid#magazine-grid {
   display: flex;
@@ -521,7 +554,7 @@ main {
 
 .book-viewport {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
   height: 60vh;
@@ -536,6 +569,10 @@ main {
   transform-style: preserve-3d;
   transform: translateX(50%); 
   transition: transform 0.5s ease;
+}
+
+.magazine-book.is-open {
+  transform: translateX(150%); 
 }
 
 .book-page {
@@ -590,6 +627,42 @@ main {
 .book-page.flipped {
   transform: rotateY(-180deg);
 }
+
+/* ==========================================================================
+   # Company Website
+   ========================================================================== */
+
+.design-grid#website-grid {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.website-image {
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  margin-top: -20px;
+}
+
+.website-image img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  cursor: pointer;
+  border-radius: 4px;
+  filter: blur(4px);
+  transition: filter 0.8s ease, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.website-image:hover img {
+  filter: blur(0);
+  transform: scale(1.02);
+}
+
+/* ==========================================================================
+   # Lightbox
+   ========================================================================== */
 
 .lightbox {
   position: fixed;
@@ -666,6 +739,10 @@ main {
   }
 }
 
+/* ==========================================================================
+   # Mobile
+   ========================================================================== */
+
 @media (max-width: 768px) {
   body {
     overflow-y: auto; 
@@ -730,14 +807,19 @@ main {
   }
 
   .magazine-book {
-    transform: translateX(0%) scale(1);
+    transform: translateX(-5%) scale(1);
+    transition: transform 0.5s ease;
+  }
+
+  .magazine-book.is-open {
+    transform: translateX(95%) scale(1);
   }
 
   .contact-container {
     flex-direction: column;
     gap: 30px;
-    min-width: 100%;
-    padding: 60px;
+    min-width: 90vw;
+    padding: 30px;
   }
 
   .lightbox {
@@ -754,12 +836,16 @@ main {
   }
 }
 
-@media (max-width: 900px) and (orientation: landscape) {
+/* ==========================================================================
+   # Mobile Landscape
+   ========================================================================== */
+
+@media (max-width: 1000px) and (orientation: landscape) {
   body {
     overflow: hidden;
   }
   
-.container {
+  .container {
     flex-direction: row;
     height: 100vh;
     width: 100vw;
@@ -774,7 +860,7 @@ main {
     max-height: none; 
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    padding: 20px 15px 80px 15px;
+    padding: 40px 15px 20px 15px;
   }
 
   main {
@@ -784,7 +870,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px 15px 80px 15px;
+    padding: 60px 15px 20px 15px;
   }
 
   .intro {
@@ -811,26 +897,27 @@ main {
     -webkit-overflow-scrolling: touch;
   }
 
-.book-viewport {
-    height: 340px; 
-    perspective: 1200px;
+  .book-viewport {
     overflow: visible;
     min-width: 100%;
     width: max-content;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 20px;
-    padding-right: 20px;
+    margin-top: 40px;
+    margin-bottom: 20px;
   }
 
   .magazine-book {
     transform: translateX(0) scale(0.85); 
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.2, 1);
+    transition: transform 0.5s ease;
   }
 
-.magazine-book.is-open {
-  margin-left: 0;
-    transform: translateX(160px) scale(0.85);
+  .magazine-book.is-open {
+    transform: translateX(140px) scale(0.85);
+  }
+
+  .contact-container {
+    margin-top: 60px;
   }
 }
