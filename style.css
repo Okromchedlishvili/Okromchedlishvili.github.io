@@ -548,7 +548,7 @@ main {
   height: 100%;
   max-height: calc(100vh - 80px);
   overflow-y: auto;
-  gap: 40px;
+  gap: 20px;
   padding: 10px 20px;
 }
 
@@ -762,6 +762,10 @@ main {
     height: auto;
   }
 
+  .intro {
+    width: 85vw;
+  }
+
   .name {
     margin-top: 20px;
     margin-bottom: 40px;
@@ -814,6 +818,11 @@ main {
 
   .magazine-book.is-open {
     transform: translateX(95%) scale(1);
+  }
+
+  .website-image img {
+    width: 80vw;
+    filter: blur(0);
   }
 
   .contact-container {
@@ -901,11 +910,12 @@ main {
   .book-viewport {
     overflow: visible;
     min-width: 100%;
+    min-height: 150%;
     width: max-content;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: -20px;
     margin-bottom: 20px;
   }
 
