@@ -356,6 +356,8 @@ document.querySelector('.preview').addEventListener('click', (event) => {
         
         updateLightboxImage();
         lightbox.classList.remove('hide');
+        document.body.classList.add('no-scroll');
+        document.querySelector('main').classList.add('no-scroll');
     }
 });
 
@@ -384,13 +386,15 @@ btnNext.addEventListener('click', () => {
 
 lightboxClose.addEventListener('click', () => {
     lightbox.classList.add('hide');
-    lightboxImg.src = ""; 
+    lightboxImg.src = "";
+    document.querySelector('main').classList.remove('no-scroll');
 });
 
 lightbox.addEventListener('click', (event) => {
     if (event.target === lightbox) {
         lightbox.classList.add('hide');
         lightboxImg.src = "";
+        document.querySelector('main').classList.remove('no-scroll');
     }
 });
 
@@ -405,6 +409,7 @@ window.addEventListener('keydown', (e) => {
         updateLightboxImage();
     } else if (e.key === 'Escape') {
         lightbox.classList.add('hide');
+        document.querySelector('main').classList.remove('no-scroll');
     }
 });
 

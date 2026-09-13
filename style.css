@@ -43,6 +43,12 @@ body {
   height: 100vh;
 }
 
+main.no-scroll,
+main.no-scroll .photography-grid,
+main.no-scroll .design-grid {
+  overflow: hidden !important;
+}
+
 /* ==========================================================================
    # Sidebar
    ========================================================================== */
