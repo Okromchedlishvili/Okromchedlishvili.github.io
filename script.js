@@ -353,7 +353,6 @@ document.querySelector('.preview').addEventListener('click', (event) => {
         
         updateLightboxImage();
         lightbox.classList.remove('hide');
-        document.body.classList.add('no-scroll');
         document.querySelector('main').classList.add('no-scroll');
     }
 });
